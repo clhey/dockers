@@ -10,13 +10,20 @@ MAINTAINER Transmission Docker Maintainers "charlie@cokapp.com"
     #rm -rf /var/lib/apt/lists/* && \
     #rm -rf /tmp/*
 
+#安装
 RUN apt-get update && \
 	apt-get install -y transmission-daemon
 
+#安装web-control
+RUN mv /usr/share/transmission/web/index.html /usr/share/transmission/web/index.original.html
+ADD ./transmission-control-full.tar.gz /usr/share/transmission/
 
+#添加配置文件
 ADD ./settings.json /var/lib/transmission-daemon/info/settings.json
-ADD ./start.sh /var/lib/transmission-daemon/start.sh
-RUN chmod +x /var/lib/transmission-daemon/start.sh
+
+#添加启动脚本
+ADD ./start.sh /start.sh
+RUN chmod +x /start.sh
 
 
 EXPOSE 9091 51413
@@ -26,6 +33,4 @@ ENV USERNAME="admin" \
 
 VOLUME ["/downloads", "/incomplete", "/watch", "/config"]
 
-WORKDIR /var/lib/transmission-daemon
-#CMD ["./start.sh"]
-CMD ["./start.sh"]
+CMD ["/start.sh"]
