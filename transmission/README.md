@@ -5,4 +5,4 @@ docker run -d -v /*your_watch_dir*:/watch -v /*your_final_dir:/downloads -v /*yo
 ```
 
 
-docker run -d  -p 51413:51413 -p 9091:9091 -e "USERNAME=admin" -e "PASSWORD=password" cokapp/tm
+docker run -d  -p 51413:51413 -p 9091:9091 -e "USERNAME=admin" -e "PASSWORD=password" cokapp/transmission
