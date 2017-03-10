@@ -21,3 +21,4 @@ EXPOSE 55555
 VOLUME /mnt/sync
 
 ENTRYPOINT ["run_sync"]
+CMD ["--config", "/mnt/sync/sync.conf"]
