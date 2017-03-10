@@ -1,22 +1,15 @@
-# Resilio Sync
-#
-# VERSION               0.1
-#
-
-FROM ubuntu
-MAINTAINER clhey Inc. <clhey@cokapp.com>
-LABEL com.resilio.version="2.4.4"
-
-ADD https://download-cdn.resilio.com/2.4.4/linux-x64/resilio-sync_x64.tar.gz /tmp/sync.tgz
-RUN tar -xf /tmp/sync.tgz -C /usr/bin rslsync && rm -f /tmp/sync.tgz
-
-COPY sync.conf.default /etc/
-COPY run_sync /usr/bin/
-
+# Instructions from the blog post at http://blog.bittorrent.com/2013/10/22/sync-hacks-deploy-bittorrent-sync-with-docker/
+FROM ubuntu:14.04
+MAINTAINER Lucas Carlson <lucas@rufy.com>
+RUN apt-get update && apt-get install -y curl
+RUN curl -o /usr/bin/btsync.tar.gz http://download-lb.utorrent.com/endpoint/btsync/os/linux-x64/track/stable
+RUN cd /usr/bin && tar -xzvf btsync.tar.gz && rm btsync.tar.gz
+RUN mkdir -p /btsync/.sync
+RUN mkdir -p /var/run/btsync
+RUN mkdir -p /data
 EXPOSE 8888
 EXPOSE 55555
-
-VOLUME /mnt/sync
-
-ENTRYPOINT ["run_sync"]
-CMD ["--config", "/mnt/sync/sync.conf"]
+ADD start-btsync /usr/bin/start-btsync
+RUN chmod +x /usr/bin/start-btsync
+VOLUME ["/data"]
+ENTRYPOINT ["start-btsync"]
