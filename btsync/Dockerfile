@@ -13,6 +13,8 @@ RUN tar -xf /tmp/sync.tgz -C /usr/bin rslsync && rm -f /tmp/sync.tgz
 COPY sync.conf.default /etc/
 COPY run_sync /usr/bin/
 
+RUN chmod +x /usr/bin/run_sync
+
 EXPOSE 8888
 EXPOSE 55555
 
