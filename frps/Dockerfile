@@ -1,12 +1,13 @@
 FROM centos:7
 MAINTAINER dev@cokapp.com
 
-RUN mkdir -p /home//frp
+RUN mkdir -p /root/frp
+WORKDIR /root/frp
 
-COPY frps /opt/frp/frps
-RUN chmod +x /opt/frp/frps
-COPY frps.ini /opt/frp/frps.ini
+COPY ./bin/frps ./frps
+RUN chmod +x ./frps
+COPY ./frps.ini ./frps.ini
 
-EXPOSE 4443 4444 80
+EXPOSE 700 800 80 443
 
-ENTRYPOINT /opt/frp/frps -c /opt/frp/frps.ini
+ENTRYPOINT /root/frp/frps -c ./frps.ini
