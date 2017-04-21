@@ -15,5 +15,5 @@ VOLUME ["/root/frp/conf"]
 
 EXPOSE 700 800 80 443
 
-ENTRYPOINT /root/frp/frps
-CMD ["/root/frp/frps", "-c ./conf/frps.ini"]
+ENTRYPOINT ["/root/frp/frps"]
+CMD ["-c", "./conf/frps.ini"]
