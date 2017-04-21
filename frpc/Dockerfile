@@ -14,5 +14,5 @@ COPY ./frpc.ini ./conf/frpc.ini
 VOLUME ["/root/frp/conf"]
 
 
-ENTRYPOINT /root/frp/frpc
-CMD ["/root/frp/frpc", "-c ./frpc.ini"]
+ENTRYPOINT ["/root/frp/frpc"]
+CMD ["-c", "./conf/frpc.ini"]
