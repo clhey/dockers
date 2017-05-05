@@ -1,0 +1,23 @@
+version: "2"
+services:   
+    frps:
+      build: ./frps
+      container_name: frps
+      expose:
+        - "80"
+        - "443"
+        - "700"
+        - "800"
+    nginx:
+      build: ./nginx
+      container_name: nginx
+      volumes: 
+        - /home/core/data/webgate/conf.d /etc/nginx/conf.d
+      links:
+        - frps      
+      ports:
+        - "80:80"
+        - "443:443"
+        - "800:800"
+        - "700:700"
+
