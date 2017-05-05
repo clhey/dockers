@@ -8,4 +8,4 @@ COPY ./conf.d /etc/nginx/conf.d
 
 VOLUME ["/etc/nginx/conf.d"]
 
-EXPOSE 80 443 700 800 
+EXPOSE 80 443
