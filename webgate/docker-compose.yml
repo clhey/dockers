@@ -6,18 +6,17 @@ services:
       expose:
         - "80"
         - "443"
-        - "700"
-        - "800"
+      ports:
+        - "800:800"
+        - "700:700"
     nginx:
       build: ./nginx
       container_name: nginx
       volumes: 
         - /home/core/data/webgate/conf.d /etc/nginx/conf.d
       links:
-        - frps      
+        - frps    
       ports:
         - "80:80"
         - "443:443"
-        - "800:800"
-        - "700:700"
 
