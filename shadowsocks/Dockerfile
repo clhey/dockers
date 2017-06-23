@@ -48,9 +48,9 @@ RUN apk upgrade --no-cache \
         /var/cache/apk/*
 
 #add conf
-RUN mkdir /root/shadowsocks/conf
-COPY ./shadowsocks.json /root/shadowsocks/conf/shadowsocks.json
-VOLUME ["/root/shadowsocks/conf"]
+RUN mkdir -p ./shadowsocks/conf
+COPY ./shadowsocks.json ./shadowsocks/conf/shadowsocks.json
+VOLUME ["./shadowsocks/conf"]
 
 ENTRYPOINT ["ss-server"]
-CMD ["-c", "/root/shadowsocks/conf/shadowsocks.json"]
+CMD ["-c", "./shadowsocks/conf/shadowsocks.json"]
