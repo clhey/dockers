@@ -1,0 +1,7 @@
+version: "2"
+services:      
+    frps:
+      build: ./
+      container_name: shadowsocks
+      ports:
+        - "5840:5840"
