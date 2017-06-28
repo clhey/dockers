@@ -4,7 +4,7 @@ services:
    db:
      image: mysql:5.7
      volumes:
-       - db_data:/var/lib/mysql
+       - /home/zheteng-data:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: hcl850924
@@ -22,5 +22,3 @@ services:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: hcl850924
-volumes:
-    db_data: /home/zheteng-data
