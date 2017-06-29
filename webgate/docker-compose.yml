@@ -13,7 +13,7 @@ services:
       build: ./nginx
       container_name: nginx
       volumes: 
-        - /home/core/data/webgate/conf.d /etc/nginx/conf.d
+        - /home/core/data/webgate/conf.d:/etc/nginx/conf.d
       links:
         - frps    
       ports:

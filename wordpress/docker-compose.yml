@@ -1,24 +1,35 @@
-version: '3'
+version: '2'
 
 services:
    db:
      image: mysql:5.7
      volumes:
-       - /home/zheteng-data:/var/lib/mysql
+       - /home/core/data/zheteng:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: hcl850924
        MYSQL_DATABASE: wordpress
        MYSQL_USER: wordpress
        MYSQL_PASSWORD: hcl850924
+     networks:
+       - gate
+     ports:
+       - "23306:3306"
    wordpress:
      depends_on:
        - db
      image: wordpress:latest
      ports:
        - "8608:80"
+     networks:
+       gate:
+         ipv4_address: 172.19.0.50
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: hcl850924
+networks:
+  gate:
+    external:
+      name: gate
