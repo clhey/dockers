@@ -4,7 +4,7 @@ services:
    db:
      image: mysql:5.7
      volumes:
-       - /home/core/data/zheteng:/var/lib/mysql
+       - /home/core/data/zheteng/db:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: hcl850924
@@ -15,12 +15,14 @@ services:
        - gate
      ports:
        - "23306:3306"
-   wordpress:
+   web:
      depends_on:
        - db
      image: wordpress:latest
-     ports:
-       - "8608:80"
+     volumes:
+       - /home/core/data/zheteng/web:/var/www/html
+     expose:
+       - "80"
      networks:
        gate:
          ipv4_address: 172.19.0.50
