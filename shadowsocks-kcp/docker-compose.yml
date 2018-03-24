@@ -1,0 +1,15 @@
+version: "2"
+services:      
+    shadowsocks-kcp:
+      restart: always
+      image: mritd/shadowsocks
+      container_name: shadowsocks-kcp
+      environment:
+        SS_MODULE: "ss-server"
+        SS_CONFIG: "-s 0.0.0.0 -p 5840 -m aes-256-cfb -k dddddd --fast-open"
+        KCP_FLAG: "true"
+        KCP_MODULE: "kcpserver"
+        KCP_CONFIG: "-t 127.0.0.1:6500 -l :5840 -mode fast2"
+      ports:
+        - "5840:5840"
+        - "6500:6500/udp"
