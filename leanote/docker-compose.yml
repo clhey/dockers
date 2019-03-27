@@ -1,0 +1,12 @@
+version: "2"
+services:      
+    leanote:
+      build: ./
+      container_name: leanote
+      volumes: 
+        - /home/core/data/leanote/db:/data/db
+        - /home/core/data/leanote/conf:/data/leanote/conf
+        - /home/core/data/leanote/files:/data/leanote/files
+        - /home/core/data/leanote/upload:/data/leanote/public/upload
+      ports:
+        - "9000:9000"
